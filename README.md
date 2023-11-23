@@ -8,52 +8,60 @@
 - [Getting Started](#getting-started)
 - [Project Deliverables](#deliverables)
 
-<a name="project-overview"></a>
 
-## Project Overview
+## Project Goal
 
-You were hired by Ironhack to perform an analytics consulting project to understand Ironhack's competitive landscape: which other coding schools are there and what drives their success or lack thereof relative to Ironhack.
+We were hired by Ironhack to perform an analytics consulting project to understand Ironhack's competitive landscape: which other coding schools are there and what drives their success or lack thereof relative to Ironhack.
 
-Your mission is to design, create and populate an appropriate database with information about coding schools that are our competition, as well as design suitable queries that answer business questions of interest (to be defined by you).
+The goal of this project is to conduct a comprehensive analysis of the coding bootcamp market, with a specific focus on Ironhack. The aim is to provide actionable insights and recommendations for improving Ironhack's competitiveness and addressing areas of improvement in their business model.
 
----
 
-<a name="project-overview"></a>
 
-## Getting Started
+## Methodologies - what did we do to perform the analysis
 
-The notebook attached to the project connects to a bootcamp review website (www.switchup.com) and scrapes some information into dataframes. This will be the basis of the information to design your database. Read the script and get a general understanding each function. Comment the code appropriately.
+1.  Libaries imported
+We begin by importing essential libraries for data analysis, such as:
+ - numpy
+ - re
+- pandas
+ - pandas.io.json import json_normalize
+ - requests
+ - from bs4 import BeautifulSoup
+ - matplotlib.pyplot
+ - seaborn
+ - mysql.connector
+ - getpass
+ - wordcloud import WordCloud
+ - nltk
+ - nltk.corpus import stopwords
 
-*   Populate the list of schools with a wider variety of schools (how are you going to get the school ID?)
 
-* Take a look at the obtained dataframes. What dimensions do you have? What can work as useful metrics? What keys do you have? How could the different dataframes be connected?
 
-* Go back to the drawing board and try to create an entity relationship diagram for tables available
+2. Market overview:
 
-* Once you have the schemas you want, you will need to:
-  - Create the suitable SQL queries to create the tables and populate them
-  - Run these queries using the appropriate Python connectors
-  - Crucial hint: check out the following tutorial:
-https://www.dataquest.io/blog/sql-insert-tutorial/
-  
+With available public information, we gather information on coding bootcamps markets, including market performance, renvenue and growth based on reports from different sources (cited in our presentation). The market forecast is unfortunately not available without charge, but the general sentiment over market growth are given based on diverse website and sample forecast reports
 
----
+3. Competitiveness landscape :
+Through CareerKarma ( stats website focusing on US bootcamps) and switchup, We scapes information over the most popular bootcamps ( based on number of graduate, ranking from students, etc). we filter the list to 8 schools and from here scape more information from switchup.org over ranking and comments (we inspect the url of switchup website to find school_id). 
+We use python to clean and manipulate data and run queries to create table which concat information scaped from websites and then connect with SQL and generate ERD.
 
-<a name="deliverables"></a>
+As we realize that some schools offeres completely different courses and/or has very low number of reviews ( below 500 over 10 years), we narrow down to 1 competitors Le wagon
 
-## Project Deliverables
+4. Ironhack vs Le wagon:
 
-We will henceforth list the requirements for each project in three groupings to help you prioritize your work
+-Le wagon has better and more consistent revieww, it is then a good benchmark for Ironhack to identify what are missing in Ironhack current business model.
+-Offer similar course and course structure, Le wagon has stronger presence in the world except for US.
+-Based on marketing material, Le wagon offers better job assurance this might be reason for declining rating of Ironhack
+-In parallel, we use "word cloud" to have a look to negative ranking/comments over ironhack to find rootcause
 
-* MVP (Minimum Viable Product): these are the absolute minimum requirements that you will have to achieve for your project to be considered completed. *They should absolutely be your priority* as failure to meet these requirements means an insufficient delivery, even if you go above and beyond on other requirements. Plan around unforesseable situations to make sure you have time to at least deliver the MVP. A good way of doing this is to plan on having the MVP well in advance of the deadline for the project.
+Through the above web scaper and word cloud. we identify strength and weakness of ironhack
 
-* Expected improvements: these are suggestions on how to improve your product, features that are not critical but that we expect most students to be able to deliver *some* of these features. They will often be stated in more open-ended description so that you can customize and differentiate your project and make it a tailored part of your portfolio.
+5. Recommendations
+Before come up with an action plan, we also take a step back to look at market demand and student motivation for coding. The survey in switchup show the most comment motivation is for career advancement. Once again, confirm our observation that Ironhack should improve their job support service
 
-* Nice-to-haves: these are suggestions on how to go above and beyond. We do *not* expect your products to contain these features / use these technologies (but we will not actively discourage you from pursuing them as well). The nice-to-haves exist more to help you find resources that may not be taught in class and put some icing on your product, potentially even *after* the bootcamp.
+With above information we give our recommendation but admits there is some limitation in terms of data interpretation due to availability of database
 
-The Deliverables for this project are:
 
-#### Minimum Viable Product
 
 [ ] Files that contain your solution submitted via a GitHub repo
 
@@ -65,37 +73,5 @@ The Deliverables for this project are:
 
 [ ] A presentation that showcases your product
 
-  - The presentation includes a business analysis built on top of your database where clear business hypotheses should be tested and some actionable conclusion must be presented
 
-  - The presentation includes a component about design choices for your database, with at least a presentation of the final ERD
-
-  - The presentation includes a component about technical challenges faced
-
-#### Expected improvements
-
-[ ] Additional depth in business analysis
-
-  - Deeper data gathering: more of the same datapoints (schools, locations, comments) AND/OR different data points (prices, recommendations, etc) 
-
-  - Enriching data gathering: more sources of data (e.g. demographics by city, salaries per country etc.)
-
-  - Multi-layered questions: use your answers to basic hypotheses to generate more refined hypotheses (which may require more sophisticated scraping/ETL)
-
-  - Charting: use visual intuition to drive your analysis
-
-
-[ ] Improved engineering and design of your solution
-
-  - Deployment of the solution to a cloud database
-
-  - Creation of auxiliary functions that test the database for data quality issues
-
-
-#### Nice-to-haves
-
-[ ] Improved engineering of solution
-
-  - Encoding of primary key - foreign key relation in database design
-
-  - Differential update of database (include only most recent data when you re-run the script)
 
